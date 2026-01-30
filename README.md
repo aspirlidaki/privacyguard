@@ -38,50 +38,49 @@ To minimize false positives, PrivacyGuard Pro applies mathematical validation te
 The Entropy Engine computes Shannon Entropy to identify strings exhibiting high randomness. This technique enables the detection of previously unknown or obfuscated secrets, such as cryptographic keys, even in the absence of predefined patterns.
 
 ---
-
 ## 4. Architecture and Implementation
-
 The tool follows a modular architecture, separating concerns across multiple components:
 
 ```text
 privacyguard/
 ├── .github/
 │   └── workflows/
-│       └── tests.yml        # Continuous Integration configuration
+│       └── tests.yml         # Continuous Integration configuration
 ├── core/
-│   ├── patterns.py          # Detection patterns and validation logic
-│   ├── scanner.py           # File traversal and analysis engine
-│   ├── logger.py            # Logging configuration and severity handling
+│   ├── patterns.py           # Detection patterns and validation logic
+│   ├── scanner.py            # File traversal and analysis engine
+│   ├── logger.py             # Logging configuration and severity handling
 │   └── __init__.py
-├── tests/                   # Automated unit tests
-├── samples/                 # Demonstration and test input files
-├── main.py                  # Command-line interface entry point
-├── requirements.txt         # Dependency specification
-└── SECURITY.md              # Responsible disclosure policy
-5. Logging and Auditability
+├── tests/                    # Automated unit tests
+├── samples/                  # Demonstration and test input files
+├── main.py                   # Command-line interface entry point
+├── requirements.txt          # Dependency specification
+└── SECURITY.md               # Responsible disclosure policy
 
-PrivacyGuard Pro provides structured logging with severity levels (INFO, WARNING, ERROR). All detection events are recorded in an audit log to support traceability and post-scan analysis.
+5. Logging and Auditability
+PrivacyGuard Pro provides structured logging to support traceability and post-scan analysis. Logging is implemented with severity levels (INFO, WARNING, ERROR) in order to distinguish between informational messages, potential security findings, and critical errors.
+
+All scan activities and detection events are recorded in a dedicated log file (scanner.log), enabling auditability and facilitating debugging, compliance verification, and forensic analysis.
 
 6. Continuous Integration Support
+The tool is designed to integrate seamlessly with Continuous Integration and Continuous Deployment (CI/CD) pipelines. GitHub Actions are used to automatically execute unit tests on each commit and pull request.
 
-The tool integrates with CI/CD pipelines through GitHub Actions, executing automated unit tests to ensure detection reliability and prevent regressions.
+This approach ensures detection accuracy, prevents regressions, and promotes reproducibility and reliability throughout the development lifecycle.
 
 7. Usage
+PrivacyGuard Pro can be executed through a command-line interface by specifying the target directory to be scanned.
+
+Bash
 python3 main.py --path ./samples --json
+The above command performs a recursive scan of the specified directory and outputs the detected findings in JSON format.
 
 8. Security and Ethical Considerations
-
 The tool adheres to the Principle of Least Privilege and includes a responsible vulnerability disclosure policy.
 
-Disclaimer:
-This tool is intended solely for authorized security auditing and educational purposes.
+Disclaimer: This tool is intended solely for authorized security auditing and educational purposes. The author assumes no responsibility for misuse or damage resulting from improper or unauthorized use of the tool.
 
 9. Conclusion
-
-PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detection, entropy analysis, and mathematical validation in static security analysis tools.
+PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detection, entropy analysis, and mathematical validation techniques in static application security testing. Its modular architecture, logging capabilities, and CI/CD integration make it suitable for both academic research and practical security auditing scenarios.
 
 Author
-
-Anastasia S.
-Cybersecurity Enthusiast & Developer
-GitHub: https://github.com/aspirlidaki
+Anastasia S. Cybersecurity Enthusiast & Developer GitHub: aspirlidaki
