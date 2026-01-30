@@ -5,8 +5,8 @@ We actively provide security updates for the following versions:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | ✅ Yes             |
-| < 1.0   | ❌ No              |
+| 1.0.x   |  Yes             |
+| < 1.0   |  No              |
 
 ## Reporting a Vulnerability
 We take the security of this tool seriously. If you find a security vulnerability, please **do not** open a public issue. 
