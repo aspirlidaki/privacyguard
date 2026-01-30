@@ -1,34 +1,26 @@
 import argparse
-import sys
+import json
 from core.scanner import scan_directory
 
 def main():
-    # Δημιουργούμε έναν "parser" για να δέχεται εντολές από το τερματικό
-    parser = argparse.ArgumentParser(description=" PrivacyGuard: Sensitive Data & Secret Scanner")
-    parser.add_argument("--path", help="Το path του φακέλου που θέλετε να σκανάρετε", required=True)
+    parser = argparse.ArgumentParser(description="🛡️ PrivacyGuard Pro")
+    parser.add_argument("--path", required=True)
+    parser.add_argument("--json", help="Αποθήκευση αποτελεσμάτων σε JSON", action="store_true")
     
     args = parser.parse_args()
-
-    print(f"\n[+] Ξεκινάει το σκανάρισμα στο: {args.path}")
-    print("-" * 50)
-
-    # Καλούμε τη συνάρτηση σκαναρίσματος που φτιάξαμε στο scanner.py
     findings = scan_directory(args.path)
 
-    if not findings:
-        print("[✅] Συγχαρητήρια! Δεν βρέθηκαν ευαίσθητα δεδομένα.")
-    else:
-        total_issues = 0
-        for file_path, issues in findings.items():
-            print(f"\n Αρχείο: {file_path}")
-            for issue_type, value in issues:
-                # Εδώ κρύβουμε ένα μέρος του κωδικού για ασφάλεια στο report
-                masked_value = value[:4] + "*" * (len(value) - 4)
-                print(f"   [⚠️] Βρέθηκε {issue_type}: {masked_value}")
-                total_issues += 1
-        
-        print("-" * 50)
-        print(f"[!] Σύνολο ευρημάτων: {total_issues}")
+    # Εκτύπωση στο τερματικό
+    for file_path, issues in findings.items():
+        print(f"\n📍 {file_path}")
+        for issue_type, value in issues:
+            print(f"   [⚠️] {issue_type}: {value[:6]}...")
+
+    # Export σε JSON αν ζητηθεί
+    if args.json:
+        with open("results.json", "w") as f:
+            json.dump(findings, f, indent=4)
+        print("\n[💾] Τα αποτελέσματα αποθηκεύτηκαν στο results.json")
 
 if __name__ == "__main__":
     main()
