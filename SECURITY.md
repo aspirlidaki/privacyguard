@@ -1,20 +1,21 @@
 # Security Policy
 
 ## Supported Versions
-We actively provide security updates for the following versions:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   |  Yes             |
-| < 1.0   |  No              |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
-We take the security of this tool seriously. If you find a security vulnerability, please **do not** open a public issue. 
 
-Instead, please follow these steps:
-1. Email your findings to **aspirlidaki@gmail.com** 
-2. Include a detailed description of the bug and steps to reproduce it (Proof of Concept).
-3. We will acknowledge your report within 48 hours and provide a fix as soon as possible.
+We take security seriously. If you discover a vulnerability in **PrivacyGuard Pro**, please report it responsibly.
 
-## Ethical Use
-This tool is designed for **defensive security** and compliance auditing. Users are responsible for ensuring they have permission to scan the target directories.
+### How to report
+Please do **not** create a public GitHub Issue for security vulnerabilities. Instead, send an email to the repository owner or report it via GitHub's "Security" tab if enabled.
+
+### Response Timeline
+* We will acknowledge your report within 48 hours.
+* We aim to patch critical vulnerabilities within 7 days.
+
+Thank you for helping keep the community safe!
