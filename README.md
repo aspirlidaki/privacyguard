@@ -1,83 +1,87 @@
-# 🛡️ PrivacyGuard Pro
-> **Advanced Static Analysis Security Testing (SAST) Tool for Secret Detection & PII Compliance.**
-
-![Build Status](https://github.com/aspirlidaki/privacyguard/actions/workflows/tests.yml/badge.svg)
-![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
-## 📖 Overview
-**PrivacyGuard** is a high-performance security scanner designed to identify sensitive information, hardcoded credentials, and Personal Identifiable Information (PII) within source code and directories. It helps developers and security engineers prevent **Credential Leakage** and ensure **GDPR Compliance**.
+# PrivacyGuard Pro  
+**Advanced Static Analysis Security Testing (SAST) Tool for Secret Detection and PII Compliance**
 
 ---
 
-## ✨ Key Features
-* **Multi-Layered Detection**: Combines Regex patterns, Shannon Entropy, and Mathematical Validation.
-* **Greek PII Support**: Specialized logic for validating Greek VAT numbers (AFM) using the **Modulo 11** algorithm.
-* **Entropy-Based Discovery**: Detects high-entropy strings (e.g., AWS/Google Keys) even without predefined patterns.
-* **Professional Logging**: Comprehensive audit trails in `scanner.log` with severity levels (INFO, WARNING, ERROR).
-* **CI/CD Ready**: Integrated GitHub Actions for automated quality assurance.
+## Abstract
+
+PrivacyGuard Pro is a static analysis security tool designed to detect sensitive information, hardcoded credentials, and Personally Identifiable Information (PII) within source code repositories. The tool aims to mitigate credential leakage risks and support compliance with data protection regulations, such as the General Data Protection Regulation (GDPR). It employs a multi-layered detection approach that combines pattern matching, entropy analysis, and mathematical validation in order to reduce false positives while maintaining high detection accuracy.
 
 ---
 
-## 🛠️ Technical Architecture
+## 1. Introduction
 
-### 1. Detection Engines
-* **Pattern Engine**: Utilizes optimized Regular Expressions for known formats (API Keys, Tokens).
-* **Validation Engine**: Reduces False Positives by verifying checksums (e.g., Modulo 11 for Greek AFM).
-* **Entropy Engine**: Calculates **Shannon Entropy** to flag suspicious high-randomness strings.
+The accidental exposure of sensitive data within source code repositories constitutes a critical security risk. Hardcoded credentials, API keys, and PII may lead to unauthorized access, data breaches, and regulatory non-compliance. Static Application Security Testing (SAST) tools provide an effective method for identifying such risks early in the development lifecycle.
 
+PrivacyGuard Pro addresses this problem by offering an extensible and automated scanning solution capable of detecting both known and unknown secret patterns, with particular emphasis on PII validation and entropy-based analysis.
 
+---
 
-### 2. Modular Structure
+## 2. System Overview
+
+PrivacyGuard Pro performs recursive directory scanning and analyzes source files using a modular detection architecture. The system is implemented in Python and is designed to be lightweight, extensible, and suitable for integration into CI/CD pipelines.
+
+---
+
+## 3. Detection Methodology
+
+### 3.1 Pattern-Based Detection
+
+The Pattern Engine utilizes optimized regular expressions to identify known formats of sensitive data, including API keys, authentication tokens, and credentials. This approach enables fast and deterministic detection of well-defined secret structures.
+
+### 3.2 Validation-Based Detection
+
+To minimize false positives, PrivacyGuard Pro applies mathematical validation techniques where applicable. A notable example is the validation of Greek VAT numbers (AFM) using the Modulo 11 checksum algorithm, ensuring that detected identifiers conform to official specifications.
+
+### 3.3 Entropy-Based Detection
+
+The Entropy Engine computes Shannon Entropy to identify strings exhibiting high randomness. This technique enables the detection of previously unknown or obfuscated secrets, such as cryptographic keys, even in the absence of predefined patterns.
+
+---
+
+## 4. Architecture and Implementation
+
+The tool follows a modular architecture, separating concerns across multiple components:
+
 ```text
 privacyguard/
 ├── .github/
 │   └── workflows/
-│       └── tests.yml     # CI/CD Pipeline configuration
+│       └── tests.yml        # Continuous Integration configuration
 ├── core/
-│   ├── patterns.py       # Detection logic & Regex
-│   ├── scanner.py        # Directory traversal & file analysis
-│   ├── logger.py         # Professional logging configuration
-│   └── __init__.py       # Module initialization
-├── tests/                # Automated Unit Tests
-├── samples/              # Test files for demonstration
-├── main.py               # CLI Entry point
-├── requirements.txt      # Project dependencies
-└── SECURITY.md           # Vulnerability disclosure policy
----
+│   ├── patterns.py          # Detection patterns and validation logic
+│   ├── scanner.py           # File traversal and analysis engine
+│   ├── logger.py            # Logging configuration and severity handling
+│   └── __init__.py
+├── tests/                   # Automated unit tests
+├── samples/                 # Demonstration and test input files
+├── main.py                  # Command-line interface entry point
+├── requirements.txt         # Dependency specification
+└── SECURITY.md              # Responsible disclosure policy
+5. Logging and Auditability
 
-## 🚀 Getting Started
+PrivacyGuard Pro provides structured logging with severity levels (INFO, WARNING, ERROR). All detection events are recorded in an audit log to support traceability and post-scan analysis.
 
-### Prerequisites
-* **Python 3.10** or higher
-* **Git** installed on your system
+6. Continuous Integration Support
 
-### Installation
-```bash
-# Clone the repository
-git clone [https://github.com/aspirlidaki/privacyguard.git](https://github.com/aspirlidaki/privacyguard.git)
+The tool integrates with CI/CD pipelines through GitHub Actions, executing automated unit tests to ensure detection reliability and prevent regressions.
 
-# Enter the directory
-cd privacyguard
-
-# Install dependencies
-pip install -r requirements.txt
-Usage
-Run the scanner on a specific directory by providing the path:
-
-Bash
+7. Usage
 python3 main.py --path ./samples --json
-##🧪 Testing
-We use automated unit tests to ensure detection accuracy and prevent regressions:
 
-Bash
-python3 -m unittest discover tests
-##🛡️ Security & Compliance
-This tool follows the Principle of Least Privilege and includes a SECURITY.md for responsible vulnerability disclosure.
+8. Security and Ethical Considerations
 
-Disclaimer: This tool is for authorized security auditing purposes only. The author is not responsible for any misuse or damage caused by this tool.
+The tool adheres to the Principle of Least Privilege and includes a responsible vulnerability disclosure policy.
 
-## Author
-Anastasia S. - Cybersecurity Enthusiast & Developer
+Disclaimer:
+This tool is intended solely for authorized security auditing and educational purposes.
 
-GitHub: @aspirlidaki
+9. Conclusion
+
+PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detection, entropy analysis, and mathematical validation in static security analysis tools.
+
+Author
+
+Anastasia S.
+Cybersecurity Enthusiast & Developer
+GitHub: https://github.com/aspirlidaki
