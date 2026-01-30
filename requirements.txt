@@ -1,7 +1,7 @@
 # Terminal styling
 colorama==0.4.6
 
-# Mathematical analysis (standard lib usually suffices, but good to have)
+# Mathematical analysis
 math-pi==0.1.1
 
 # Professional argument parsing
