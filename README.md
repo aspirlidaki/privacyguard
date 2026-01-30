@@ -99,4 +99,5 @@ PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detec
 
 
 ### Author
-Anastasia S. Cybersecurity Enthusiast & Developer GitHub: aspirlidaki
+Anastasia S. Cybersecurity Enthusiast & Developer GitHub: 
+@aspirlidaki
