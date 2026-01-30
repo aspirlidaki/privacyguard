@@ -1,3 +1,4 @@
+![Tests](https://github.com/aspirlidaki/privacyguard/actions/workflows/tests.yml/badge.svg)
 #  PrivacyGuard: Sensitive Data & Secret Scanner
 ## OVERVIEW
 **PrivacyGuard** is a static analysis security tool (SAST) designed to detect hardcoded secrets and sensitive information within source code. This project focuses on identifying leaked API keys and ensuring GDPR compliance by detecting Greek national identifiers (AFM/AMKA).
