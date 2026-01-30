@@ -1,1 +1,8 @@
-# Δεν χρειαζόμαστε εξωτερικές βιβλιοθήκες ακόμα
+# Terminal styling
+colorama==0.4.6
+
+# Mathematical analysis (standard lib usually suffices, but good to have)
+math-pi==0.1.1
+
+# Professional argument parsing
+argparse==1.4.0

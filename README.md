@@ -1,4 +1,4 @@
-# 🛡️ PrivacyGuard 
+# 🛡️ PrivacyGuard Pro
 > **Advanced Static Analysis Security Testing (SAST) Tool for Secret Detection & PII Compliance.**
 
 ![Build Status](https://github.com/aspirlidaki/privacyguard/actions/workflows/tests.yml/badge.svg)
@@ -7,8 +7,6 @@
 
 ## 📖 Overview
 **PrivacyGuard** is a high-performance security scanner designed to identify sensitive information, hardcoded credentials, and Personal Identifiable Information (PII) within source code and directories. It helps developers and security engineers prevent **Credential Leakage** and ensure **GDPR Compliance**.
-
-
 
 ---
 
@@ -33,41 +31,53 @@
 ### 2. Modular Structure
 ```text
 privacyguard/
+├── .github/
+│   └── workflows/
+│       └── tests.yml     # CI/CD Pipeline configuration
 ├── core/
-│   ├── patterns.py   # Detection logic & Regex
-│   ├── scanner.py    # Directory traversal & file analysis
-│   └── logger.py     # Professional logging configuration
-├── tests/            # Automated Unit Tests
-├── samples/          # Test files for demonstration
-└── main.py           # CLI Entry point
+│   ├── patterns.py       # Detection logic & Regex
+│   ├── scanner.py        # Directory traversal & file analysis
+│   ├── logger.py         # Professional logging configuration
+│   └── __init__.py       # Module initialization
+├── tests/                # Automated Unit Tests
+├── samples/              # Test files for demonstration
+├── main.py               # CLI Entry point
+├── requirements.txt      # Project dependencies
+└── SECURITY.md           # Vulnerability disclosure policy
+---
 
-🚀 Getting Started
-Prerequisites
-Python 3.10 or higher
+## 🚀 Getting Started
 
-Git
+### Prerequisites
+* **Python 3.10** or higher
+* **Git** installed on your system
 
-Installation
-Bash
+### Installation
+```bash
+# Clone the repository
 git clone [https://github.com/aspirlidaki/privacyguard.git](https://github.com/aspirlidaki/privacyguard.git)
+
+# Enter the directory
 cd privacyguard
+
+# Install dependencies
 pip install -r requirements.txt
 Usage
-Run the scanner on a specific directory:
+Run the scanner on a specific directory by providing the path:
 
 Bash
 python3 main.py --path ./samples --json
-🧪 Testing
-We use automated unit tests to ensure detection accuracy:
+##🧪 Testing
+We use automated unit tests to ensure detection accuracy and prevent regressions:
 
 Bash
 python3 -m unittest discover tests
-🛡️ Security & Compliance
+##🛡️ Security & Compliance
 This tool follows the Principle of Least Privilege and includes a SECURITY.md for responsible vulnerability disclosure.
 
-Disclaimer: This tool is for authorized security auditing purposes only.
+Disclaimer: This tool is for authorized security auditing purposes only. The author is not responsible for any misuse or damage caused by this tool.
 
-👩‍💻 Author
+## Author
 Anastasia S. - Cybersecurity Enthusiast & Developer
 
 GitHub: @aspirlidaki
