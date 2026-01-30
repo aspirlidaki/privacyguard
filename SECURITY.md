@@ -12,7 +12,7 @@ We actively provide security updates for the following versions:
 We take the security of this tool seriously. If you find a security vulnerability, please **do not** open a public issue. 
 
 Instead, please follow these steps:
-1. Email your findings to **your-email@example.com** (βάλε το δικό σου).
+1. Email your findings to **aspirlidaki@gmail.com** 
 2. Include a detailed description of the bug and steps to reproduce it (Proof of Concept).
 3. We will acknowledge your report within 48 hours and provide a fix as soon as possible.
 
