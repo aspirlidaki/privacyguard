@@ -56,31 +56,47 @@ privacyguard/
 ├── main.py                   # Command-line interface entry point
 ├── requirements.txt          # Dependency specification
 └── SECURITY.md               # Responsible disclosure policy
+```
 
-5. Logging and Auditability
+## 5. Logging and Auditability
 PrivacyGuard Pro provides structured logging to support traceability and post-scan analysis. Logging is implemented with severity levels (INFO, WARNING, ERROR) in order to distinguish between informational messages, potential security findings, and critical errors.
 
 All scan activities and detection events are recorded in a dedicated log file (scanner.log), enabling auditability and facilitating debugging, compliance verification, and forensic analysis.
 
-6. Continuous Integration Support
+---
+
+
+## 6. Continuous Integration Support
 The tool is designed to integrate seamlessly with Continuous Integration and Continuous Deployment (CI/CD) pipelines. GitHub Actions are used to automatically execute unit tests on each commit and pull request.
 
 This approach ensures detection accuracy, prevents regressions, and promotes reproducibility and reliability throughout the development lifecycle.
 
-7. Usage
+---
+
+
+## 7. Usage
 PrivacyGuard Pro can be executed through a command-line interface by specifying the target directory to be scanned.
 
 Bash
 python3 main.py --path ./samples --json
 The above command performs a recursive scan of the specified directory and outputs the detected findings in JSON format.
 
-8. Security and Ethical Considerations
+---
+
+
+## 8. Security and Ethical Considerations
 The tool adheres to the Principle of Least Privilege and includes a responsible vulnerability disclosure policy.
 
 Disclaimer: This tool is intended solely for authorized security auditing and educational purposes. The author assumes no responsibility for misuse or damage resulting from improper or unauthorized use of the tool.
 
-9. Conclusion
+---
+
+
+## 9. Conclusion
 PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detection, entropy analysis, and mathematical validation techniques in static application security testing. Its modular architecture, logging capabilities, and CI/CD integration make it suitable for both academic research and practical security auditing scenarios.
 
-Author
+---
+
+
+### Author
 Anastasia S. Cybersecurity Enthusiast & Developer GitHub: aspirlidaki
