@@ -40,13 +40,11 @@ def validate_afm(afm: str) -> bool:
 
 
     """
-   # Έλεγχος για το '000000000' που περνάει μαθηματικά αλλά είναι άκυρο
-    if not afm.isdigit() or len(afm) != 9 or afm == "000000000":
-        return False
     # Fail Fast: Αν δεν είναι 9 ψηφία, απορρίπτεται αμέσως.
     if not afm.isdigit() or len(afm) != 9:
         return False
-    
+    if afm == "000000000":
+        return False
     try:
         # Μετατροπή string σε λίστα ακεραίων
         digits = [int(d) for d in afm]
