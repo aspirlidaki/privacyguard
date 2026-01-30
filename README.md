@@ -13,13 +13,13 @@ PrivacyGuard is a static analysis security tool designed to detect sensitive inf
 
 The accidental exposure of sensitive data within source code repositories constitutes a critical security risk. Hardcoded credentials, API keys, and PII may lead to unauthorized access, data breaches, and regulatory non-compliance. Static Application Security Testing (SAST) tools provide an effective method for identifying such risks early in the development lifecycle.
 
-PrivacyGuard Pro addresses this problem by offering an extensible and automated scanning solution capable of detecting both known and unknown secret patterns, with particular emphasis on PII validation and entropy-based analysis.
+PrivacyGuard  addresses this problem by offering an extensible and automated scanning solution capable of detecting both known and unknown secret patterns, with particular emphasis on PII validation and entropy-based analysis.
 
 ---
 
 ## 2. System Overview
 
-PrivacyGuard Pro performs recursive directory scanning and analyzes source files using a modular detection architecture. The system is implemented in Python and is designed to be lightweight, extensible, and suitable for integration into CI/CD pipelines.
+PrivacyGuard  performs recursive directory scanning and analyzes source files using a modular detection architecture. The system is implemented in Python and is designed to be lightweight, extensible, and suitable for integration into CI/CD pipelines.
 
 ---
 
@@ -31,7 +31,7 @@ The Pattern Engine utilizes optimized regular expressions to identify known form
 
 ### 3.2 Validation-Based Detection
 
-To minimize false positives, PrivacyGuard Pro applies mathematical validation techniques where applicable. A notable example is the validation of Greek VAT numbers (AFM) using the Modulo 11 checksum algorithm, ensuring that detected identifiers conform to official specifications.
+To minimize false positives, PrivacyGuard  applies mathematical validation techniques where applicable. A notable example is the validation of Greek VAT numbers (AFM) using the Modulo 11 checksum algorithm, ensuring that detected identifiers conform to official specifications.
 
 ### 3.3 Entropy-Based Detection
 
