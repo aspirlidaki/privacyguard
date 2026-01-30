@@ -1,11 +1,11 @@
-# PrivacyGuard Pro  
+# PrivacyGuard 
 **Advanced Static Analysis Security Testing (SAST) Tool for Secret Detection and PII Compliance**
 
 ---
 
 ## Abstract
 
-PrivacyGuard Pro is a static analysis security tool designed to detect sensitive information, hardcoded credentials, and Personally Identifiable Information (PII) within source code repositories. The tool aims to mitigate credential leakage risks and support compliance with data protection regulations, such as the General Data Protection Regulation (GDPR). It employs a multi-layered detection approach that combines pattern matching, entropy analysis, and mathematical validation in order to reduce false positives while maintaining high detection accuracy.
+PrivacyGuard is a static analysis security tool designed to detect sensitive information, hardcoded credentials, and Personally Identifiable Information (PII) within source code repositories. The tool aims to mitigate credential leakage risks and support compliance with data protection regulations, such as the General Data Protection Regulation (GDPR). It employs a multi-layered detection approach that combines pattern matching, entropy analysis, and mathematical validation in order to reduce false positives while maintaining high detection accuracy.
 
 ---
 
