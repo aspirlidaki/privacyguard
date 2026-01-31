@@ -77,9 +77,13 @@ This approach ensures detection accuracy, prevents regressions, and promotes rep
 ## 7. Usage
 PrivacyGuard can be executed through a command-line interface by specifying the target directory to be scanned.
 
+```bash
 Bash
 python3 main.py --path ./samples --json
+```
+
 The above command performs a recursive scan of the specified directory and outputs the detected findings in JSON format.
+
 
 ---
 
@@ -101,4 +105,5 @@ PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detec
 ### Author
 Anastasia S. Cybersecurity Enthusiast & Developer GitHub: 
 @aspirlidaki
+
 
