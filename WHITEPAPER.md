@@ -59,7 +59,7 @@ privacyguard/
 ```
 
 ## 5. Logging and Auditability
-PrivacyGuard Pro provides structured logging to support traceability and post-scan analysis. Logging is implemented with severity levels (INFO, WARNING, ERROR) in order to distinguish between informational messages, potential security findings, and critical errors.
+PrivacyGuard provides structured logging to support traceability and post-scan analysis. Logging is implemented with severity levels (INFO, WARNING, ERROR) in order to distinguish between informational messages, potential security findings, and critical errors.
 
 All scan activities and detection events are recorded in a dedicated log file (scanner.log), enabling auditability and facilitating debugging, compliance verification, and forensic analysis.
 
@@ -75,7 +75,7 @@ This approach ensures detection accuracy, prevents regressions, and promotes rep
 
 
 ## 7. Usage
-PrivacyGuard Pro can be executed through a command-line interface by specifying the target directory to be scanned.
+PrivacyGuard can be executed through a command-line interface by specifying the target directory to be scanned.
 
 Bash
 python3 main.py --path ./samples --json
@@ -101,3 +101,4 @@ PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detec
 ### Author
 Anastasia S. Cybersecurity Enthusiast & Developer GitHub: 
 @aspirlidaki
+
