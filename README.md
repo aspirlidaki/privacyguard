@@ -79,7 +79,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Anastasia S. | GitHub Profile EOF
 ---
 
-## 🐳 Docker Support
+##  Docker Support
 
 You can run PrivacyGuard Pro inside a container without installing Python locally.
 
