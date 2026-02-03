@@ -9,7 +9,7 @@
 
 ## Reporting a Vulnerability
 
-We take security seriously. If you discover a vulnerability in **PrivacyGuard Pro**, please report it responsibly.
+We take security seriously. If you discover a vulnerability in **PrivacyGuard**, please report it responsibly.
 
 ### How to report
 Please do **not** create a public GitHub Issue for security vulnerabilities. Instead, send an email to the repository owner or report it via GitHub's "Security" tab if enabled.
