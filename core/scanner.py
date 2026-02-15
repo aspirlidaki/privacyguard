@@ -2,7 +2,7 @@ import os
 import re
 import math
 import logging
-from .patterns import PATTERNS, validate_afm, validate_amka, validate_iban
+from .patterns import PATTERNS, validate_afm, validate_luhn, validate_iban
 
 def calculate_shannon_entropy(data):
     """Calculates the Shannon entropy of a string."""
@@ -18,7 +18,6 @@ def calculate_shannon_entropy(data):
 def scan_file(filepath):
     results = []
     try:
-        # Skip binary/media files
         if filepath.lower().endswith(('.png', '.jpg', '.jpeg', '.exe', '.dll', '.so', '.pdf', '.zip')):
             return []
 
@@ -31,11 +30,11 @@ def scan_file(filepath):
                         payload = match.group()
                         is_valid = True
                         
-                        # Apply Logic Validation
+                        # Apply specialized math validation
                         if name == 'Greek AFM (VAT)':
                             is_valid = validate_afm(payload)
-                        elif name == 'Greek AMKA':
-                            is_valid = validate_amka(payload)
+                        elif name in ['Greek AMKA', 'Credit Card']:
+                            is_valid = validate_luhn(payload)
                         elif name == 'Greek IBAN':
                             is_valid = validate_iban(payload)
 
@@ -44,14 +43,13 @@ def scan_file(filepath):
                                 'file': filepath,
                                 'line': line_num,
                                 'type': name,
-                                'payload': payload[:4] + "****"  # Masking for safety
+                                'payload': payload[:4] + "****" # Data Masking
                             })
 
-                # 2. Entropy Check (for unknown secrets)
+                # 2. Entropy Check (Secondary detection layer)
                 words = line.split()
                 for word in words:
                     if len(word) > 20 and calculate_shannon_entropy(word) > 4.5:
-                        # Avoid flagging valid IBANs as High Entropy
                         if not word.startswith('GR'): 
                             results.append({
                                 'file': filepath,
@@ -66,11 +64,12 @@ def scan_file(filepath):
     return results
 
 def scan_directory(directory_path):
-    all_findings = []
+    all_findings = {} # Changed to dict for main.py compatibility
     for root, _, files in os.walk(directory_path):
         for file in files:
             filepath = os.path.join(root, file)
             findings = scan_file(filepath)
             if findings:
-                all_findings.extend(findings)
+                # Format for main.py: {path: [(type, payload), ...]}
+                all_findings[filepath] = [(f['type'], f['payload']) for f in findings]
     return all_findings
