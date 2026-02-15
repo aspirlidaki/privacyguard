@@ -2,7 +2,7 @@
 PrivacyGuard Pro - Detection Patterns & Validation Logic
 ------------------------------------------------------
 """
-
+  
 # --- 1. DETECTION SIGNATURES (REGEX) ---
 PATTERNS = {
     'Google API Key': r'AIza[0-9A-Za-z-_]{35}',
