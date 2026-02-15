@@ -1,7 +1,6 @@
 """
 PrivacyGuard Pro - Detection Patterns & Validation Logic
 ------------------------------------------------------
-Author: Anastasia S.
 """
 
 # --- 1. DETECTION SIGNATURES (REGEX) ---
@@ -19,12 +18,12 @@ PATTERNS = {
 # --- 2. VALIDATION ALGORITHMS ---
 
 def validate_afm(afm: str) -> bool:
-    """Επαλήθευση Ελληνικού ΑΦΜ (Modulo 11)."""
+    """Validation of Greek AFM (Modulo 11)."""
     if not afm.isdigit() or len(afm) != 9 or afm == "000000000":
         return False
     try:
         digits = [int(d) for d in afm]
-        # Weighted sum using descending powers of 2
+        # Sum weighted by descending powers of 2
         sum_val = sum(digits[i] * (2**(8-i)) for i in range(8))
         remainder = sum_val % 11
         check_digit = remainder % 10
@@ -33,42 +32,26 @@ def validate_afm(afm: str) -> bool:
         return False
 
 def validate_luhn(number: str) -> bool:
-    """Generic Luhn Algorithm (Mod 10) for AMKA and Credit Cards."""
+    """Luhn Algorithm (Mod 10) for Credit Cards and AMKA."""
     if not number.isdigit():
         return False
-    
     digits = [int(d) for d in number]
     checksum = 0
-    # Iterate from right to left
     for i in range(len(digits) - 1, -1, -1):
         n = digits[i]
-        # Double every second digit from the right
         if (len(digits) - i) % 2 == 0:  
             n *= 2
             if n > 9:
                 n -= 9
         checksum += n
-        
     return checksum % 10 == 0
 
-# Aliasing for backward compatibility with existing scanner calls
-validate_amka = validate_luhn
-
 def validate_iban(iban: str) -> bool:
-    """Επαλήθευση Ελληνικού IBAN (Modulo 97)."""
+    """Greek IBAN Validation (Modulo 97)."""
     iban = iban.replace(" ", "").upper()
     if len(iban) != 27 or not iban.startswith("GR"):
         return False
-        
-    # Move the first 4 characters to the end
+    # Move prefix to end and convert letters to numbers
     rearranged = iban[4:] + iban[:4]
-    
-    # Convert alphanumeric characters to numbers (A=10, B=11...)
-    numeric_string = ""
-    for char in rearranged:
-        if char.isdigit():
-            numeric_string += char
-        else:
-            numeric_string += str(ord(char) - 55)
-            
+    numeric_string = "".join(str(ord(c) - 55) if c.isalpha() else c for c in rearranged)
     return int(numeric_string) % 97 == 1
