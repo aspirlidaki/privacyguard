@@ -16,6 +16,7 @@ def calculate_shannon_entropy(data):
 def scan_file(filepath):
     results = []
     try:
+        # Optimization: Skip non-text files
         if filepath.lower().endswith(('.png', '.jpg', '.jpeg', '.exe', '.pdf', '.zip')):
             return []
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -29,7 +30,8 @@ def scan_file(filepath):
                         elif name == 'Greek IBAN': is_valid = validate_iban(payload)
                         
                         if is_valid:
-                            results.append((name, payload[:4] + "****")) # Data Masking
+                            # Payload masking for security forensics
+                            results.append((name, payload[:4] + "****")) 
     except Exception: pass
     return results
 
