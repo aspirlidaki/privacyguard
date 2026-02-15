@@ -10,8 +10,10 @@ PATTERNS = {
     'AWS Access Key': r'AKIA[0-9A-Z]{16}',
     'GitHub Token': r'ghp_[a-zA-Z0-9]{36}',
     'Greek AFM (VAT)': r'\b\d{9}\b',
-    'Greek AMKA': r'\b\d{11}\b',        # ΝΕΟ: 11 Ψηφία
-    'Greek IBAN': r'\bGR\d{25}\b',      # ΝΕΟ: GR + 25 ψηφία
+    'Greek AMKA': r'\b\d{11}\b',        # 11 Ψηφία
+    'Greek IBAN': r'\bGR\d{25}\b',      # GR + 25 ψηφία
+    'Azure Secret': r'[a-zA-Z0-9]{3}~[a-zA-Z0-9.-_]{34}', # Azure format
+    'Credit Card (Generic)': r'\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b', # Visa, MC, Amex, Discover
 }
 
 # --- 2. VALIDATION ALGORITHMS ---
@@ -33,6 +35,22 @@ def validate_amka(amka: str) -> bool:
     """Επαλήθευση ΑΜΚΑ (Luhn Algorithm)."""
     if not amka.isdigit() or len(amka) != 11:
         return False
+
+    def validate_luhn(number: str) -> bool:
+    """Generic Luhn Algorithm used for AMKA and Credit Cards."""
+    if not number.isdigit():
+        return False
+    digits = [int(d) for d in number]
+    checksum = 0
+    for i in range(len(digits) - 1, -1, -1):
+        n = digits[i]
+        if (len(digits) - i) % 2 == 0:
+            n *= 2
+            if n > 9:
+                n -= 9
+        checksum += n
+    return checksum % 10 == 0
+    validate_amka = validate_luhn
     
     # Luhn Algorithm implementation
     digits = [int(d) for d in amka]
