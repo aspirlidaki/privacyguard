@@ -30,34 +30,16 @@ def validate_afm(afm: str) -> bool:
         return check_digit == digits[8]
     except Exception:
         return False
-
-def validate_amka(amka: str) -> bool:
-    """Επαλήθευση ΑΜΚΑ (Luhn Algorithm)."""
-    if not amka.isdigit() or len(amka) != 11:
-        return False
-
-    def validate_luhn(number: str) -> bool:
+def validate_luhn(number: str) -> bool:
     """Generic Luhn Algorithm used for AMKA and Credit Cards."""
     if not number.isdigit():
         return False
+    
     digits = [int(d) for d in number]
     checksum = 0
     for i in range(len(digits) - 1, -1, -1):
         n = digits[i]
-        if (len(digits) - i) % 2 == 0:
-            n *= 2
-            if n > 9:
-                n -= 9
-        checksum += n
-    return checksum % 10 == 0
-    validate_amka = validate_luhn
-    
-    # Luhn Algorithm implementation
-    digits = [int(d) for d in amka]
-    checksum = 0
-    for i in range(len(digits) - 1, -1, -1):
-        n = digits[i]
-        if (len(digits) - i) % 2 == 0:  # Κάθε δεύτερο ψηφίο από το τέλος
+        if (len(digits) - i) % 2 == 0:  
             n *= 2
             if n > 9:
                 n -= 9
@@ -65,24 +47,23 @@ def validate_amka(amka: str) -> bool:
         
     return checksum % 10 == 0
 
+# Aliasing for backward compatibility
+validate_amka = validate_luhn
+
 def validate_iban(iban: str) -> bool:
     """Επαλήθευση Ελληνικού IBAN (Modulo 97)."""
-    # Αφαιρούμε κενά και κάνουμε κεφαλαία
     iban = iban.replace(" ", "").upper()
     
     if len(iban) != 27 or not iban.startswith("GR"):
         return False
         
-    # Μετακίνηση των 4 πρώτων χαρακτήρων (GRxx) στο τέλος
     rearranged = iban[4:] + iban[:4]
     
-    # Μετατροπή γραμμάτων σε αριθμούς (A=10, B=11, ..., Z=35)
     numeric_string = ""
     for char in rearranged:
         if char.isdigit():
             numeric_string += char
         else:
-            numeric_string += str(ord(char) - 55)
+            numeric_string += str(ord(char) - 55) # A=10, B=11...
             
-    # Υπολογισμός Modulo 97
     return int(numeric_string) % 97 == 1
