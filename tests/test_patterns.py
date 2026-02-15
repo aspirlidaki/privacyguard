@@ -12,11 +12,11 @@ class TestValidationLogic(unittest.TestCase):
         self.assertTrue(validate_iban("GR6101101230000012345678901"), "Should pass Modulo 97 validation")
 
     def test_valid_credit_card(self):
-        # Correctly formatted Visa passing Luhn check
+        # Valid Visa number passing Luhn (Mod 10) check
         self.assertTrue(validate_luhn("4539148802132590"), "Should pass Luhn check")
 
     def test_valid_amka(self):
-        # Valid Luhn for AMKA
+        # Valid Luhn check for 11-digit AMKA
         self.assertTrue(validate_luhn("01018012342"), "Should pass Luhn check")
 
 if __name__ == '__main__':
