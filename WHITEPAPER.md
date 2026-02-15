@@ -37,6 +37,13 @@ To minimize false positives, PrivacyGuard  applies mathematical validation techn
 
 The Entropy Engine computes Shannon Entropy to identify strings exhibiting high randomness. This technique enables the detection of previously unknown or obfuscated secrets, such as cryptographic keys, even in the absence of predefined patterns.
 
+PrivacyGuard has been extended to provide global security coverage:
+
+### 3.4 Financial Data Validation
+The tool now implements **Luhn Algorithm** validation for Credit Card numbers. This ensures that random strings of 13-16 digits are not flagged unless they satisfy the mathematical checksum used by major issuers (Visa, Mastercard, Amex).
+
+### 3.5 Cloud Infrastructure Secrets
+Detection signatures for **Azure Client Secrets** have been added. These are verified using high-entropy boundary analysis (threshold > 4.5) to ensure they are high-density cryptographic strings.
 ---
 ## 4. Architecture and Implementation
 The tool follows a modular architecture, separating concerns across multiple components:
@@ -105,5 +112,6 @@ PrivacyGuard Pro demonstrates the effectiveness of combining pattern-based detec
 ### Author
 Anastasia S. Cybersecurity Enthusiast & Developer GitHub: 
 @aspirlidaki
+
 
 
