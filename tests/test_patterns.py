@@ -1,23 +1,23 @@
 import unittest
-from core.patterns import validate_luhn, validate_iban, validate_afm
+from core.patterns import validate_amka, validate_iban, validate_afm, validate_luhn
 
 class TestValidationLogic(unittest.TestCase):
 
+    def test_valid_amka(self):
+        # Valid Luhn: 01018012342 (Sum is 30)
+        self.assertTrue(validate_amka("01018012342"))
+
     def test_valid_afm(self):
-        # Valid: Sum weighted by powers of 2 results in check digit 3
-        self.assertTrue(validate_afm("123456783"), "Should pass Modulo 11 check")
+        # Valid Modulo 11: 123456783 (Sum is 1004, Remainder is 3)
+        self.assertTrue(validate_afm("123456783"))
 
     def test_valid_iban(self):
-        # Valid Greek IBAN that passes Modulo 97 check
-        self.assertTrue(validate_iban("GR6101101230000012345678901"), "Should pass Modulo 97 validation")
+        # Valid Greek IBAN for Modulo 97 check
+        self.assertTrue(validate_iban("GR6101101230000012345678901"))
 
     def test_valid_credit_card(self):
-        # Valid Visa number passing Luhn (Mod 10) check
-        self.assertTrue(validate_luhn("4539148802132590"), "Should pass Luhn check")
-
-    def test_valid_amka(self):
-        # Valid Luhn check for 11-digit AMKA
-        self.assertTrue(validate_luhn("01018012342"), "Should pass Luhn check")
+        # Valid Visa number for Luhn check
+        self.assertTrue(validate_luhn("4539148902132595"))
 
 if __name__ == '__main__':
     unittest.main()
