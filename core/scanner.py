@@ -5,7 +5,7 @@ import logging
 from .patterns import PATTERNS, validate_afm, validate_luhn, validate_iban
 
 def calculate_shannon_entropy(data):
-    """Calculates the Shannon entropy of a string."""
+    """Calculates string randomness using Shannon entropy."""
     if not data:
         return 0
     entropy = 0
@@ -18,19 +18,20 @@ def calculate_shannon_entropy(data):
 def scan_file(filepath):
     results = []
     try:
+        # Exclude common non-text files to optimize performance
         if filepath.lower().endswith(('.png', '.jpg', '.jpeg', '.exe', '.dll', '.so', '.pdf', '.zip')):
             return []
 
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
             for line_num, line in enumerate(f, 1):
-                # 1. Pattern Matching (Regex)
+                # 1. Pattern Matching (Regex & Math Validation)
                 for name, pattern in PATTERNS.items():
                     matches = re.finditer(pattern, line)
                     for match in matches:
                         payload = match.group()
                         is_valid = True
                         
-                        # Apply specialized math validation
+                        # Apply specialized checksums
                         if name == 'Greek AFM (VAT)':
                             is_valid = validate_afm(payload)
                         elif name in ['Greek AMKA', 'Credit Card']:
@@ -43,14 +44,14 @@ def scan_file(filepath):
                                 'file': filepath,
                                 'line': line_num,
                                 'type': name,
-                                'payload': payload[:4] + "****" # Data Masking
+                                'payload': payload[:4] + "****" # Secure Data Masking
                             })
 
-                # 2. Entropy Check (Secondary detection layer)
+                # 2. Shannon Entropy Analysis (Detection of unknown secrets)
                 words = line.split()
                 for word in words:
                     if len(word) > 20 and calculate_shannon_entropy(word) > 4.5:
-                        if not word.startswith('GR'): 
+                        if not word.startswith('GR'): # Exclude IBANs from entropy flagging
                             results.append({
                                 'file': filepath,
                                 'line': line_num,
@@ -64,12 +65,12 @@ def scan_file(filepath):
     return results
 
 def scan_directory(directory_path):
-    all_findings = {} # Changed to dict for main.py compatibility
+    all_findings = {} 
     for root, _, files in os.walk(directory_path):
         for file in files:
             filepath = os.path.join(root, file)
             findings = scan_file(filepath)
             if findings:
-                # Format for main.py: {path: [(type, payload), ...]}
+                # Format required for main.py reporting
                 all_findings[filepath] = [(f['type'], f['payload']) for f in findings]
     return all_findings
