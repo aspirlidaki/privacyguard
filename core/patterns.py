@@ -1,8 +1,9 @@
 """
 PrivacyGuard Pro - Detection Patterns & Validation Logic
 ------------------------------------------------------
+Author: Anastasia S.
 """
-  
+
 # --- 1. DETECTION SIGNATURES (REGEX) ---
 PATTERNS = {
     'Google API Key': r'AIza[0-9A-Za-z-_]{35}',
@@ -18,12 +19,12 @@ PATTERNS = {
 # --- 2. VALIDATION ALGORITHMS ---
 
 def validate_afm(afm: str) -> bool:
-    """Validation of Greek AFM (Modulo 11)."""
+    """Επαλήθευση Ελληνικού ΑΦΜ (Modulo 11)."""
     if not afm.isdigit() or len(afm) != 9 or afm == "000000000":
         return False
     try:
         digits = [int(d) for d in afm]
-        # Sum weighted by descending powers of 2
+        # Weighted sum based on descending powers of 2
         sum_val = sum(digits[i] * (2**(8-i)) for i in range(8))
         remainder = sum_val % 11
         check_digit = remainder % 10
@@ -32,7 +33,7 @@ def validate_afm(afm: str) -> bool:
         return False
 
 def validate_luhn(number: str) -> bool:
-    """Luhn Algorithm (Mod 10) for Credit Cards and AMKA."""
+    """Generic Luhn Algorithm used for AMKA and Credit Cards."""
     if not number.isdigit():
         return False
     digits = [int(d) for d in number]
@@ -46,12 +47,14 @@ def validate_luhn(number: str) -> bool:
         checksum += n
     return checksum % 10 == 0
 
+# Alias for AMKA compatibility
+validate_amka = validate_luhn
+
 def validate_iban(iban: str) -> bool:
-    """Greek IBAN Validation (Modulo 97)."""
+    """Επαλήθευση Ελληνικού IBAN (Modulo 97)."""
     iban = iban.replace(" ", "").upper()
     if len(iban) != 27 or not iban.startswith("GR"):
         return False
-    # Move prefix to end and convert letters to numbers
     rearranged = iban[4:] + iban[:4]
     numeric_string = "".join(str(ord(c) - 55) if c.isalpha() else c for c in rearranged)
     return int(numeric_string) % 97 == 1
